@@ -38,6 +38,8 @@ After navigating to the url (based on `dotnet run Minimal.Web.sln --project Mini
 ![Preview](docs/preview.jpg)
 
 ## About the code
-This minimal application is built on the ASP.NET core base template. I have additionally added the following packages:
+This minimal application is based on the [minimal-web](https://github.com/rohit-lakhanpal/minimal-web) project and has been adapted for Razor Pages.
+
+I have additionally added the following packages:
 - Microsoft.Extensions.Diagnostics.HealthChecks
 - Microsoft.ApplicationInsights.AspNetCore
