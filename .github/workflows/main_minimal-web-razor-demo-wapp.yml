@@ -12,7 +12,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: minimal-web-razor-demo-wapp    # set this to your application's name
   AZURE_WEBAPP_PROJECT_PATH: './src/Minimal.Web.Razor' # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '7.x'           # set this to the dot net version to use
+  DOTNET_VERSION: '7.x' # set this to the dot net version to use
 
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'minimal-web-razor-demo-wapp'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: '.'
