@@ -8,22 +8,32 @@ This is a Minimal ASP.NET (7.0.0.0) Web Application that:
 
 You can use this application when testing different hosting configurations.
 
+[![Build and deploy ASP.Net Core app to Azure Web App - minimal-web-razor-demo-wapp](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/main_minimal-web-razor-demo-wapp.yml/badge.svg)](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/main_minimal-web-razor-demo-wapp.yml)
+
+### Demo
+Try the following url:
+- https://minimal-web-razor-demo-wapp.azurewebsites.net
+- https://minimal-web-razor-demo-wapp.azurewebsites.net/healthz
+- https://minimal-web-razor-demo-wapp.azurewebsites.net/path/to/non/existant/folder/handled/by/catch-all
+- https://minimal-web-razor-demo-wapp.azurewebsites.net/test-query-string?key1=value1&key2=value2
+
 ## How to run this sample
-1. Clone the repo
-    > git clone https://github.com/rohit-lakhanpal/minimal-web-razor.git
+### Clone the repo
+> git clone https://github.com/rohit-lakhanpal/minimal-web-razor.git
 
-2. Build the solution
-    > cd minimal-web-razor/src
+### Build the solution
+> cd minimal-web-razor/src
 
-    > dotnet build Minimal.Web.sln
+> dotnet build Minimal.Web.sln
 
-3. Run the project
+### Run the project
     > dotnet run Minimal.Web.sln --project Minimal.Web.Razor
 
 ![Run Output](docs/run.jpg)
 
 ## Expected output
 After navigating to the url (based on `dotnet run Minimal.Web.sln --project Minimal.Web.Razor`) this is what you can expect.
+
 ![Previewt](docs/preview.jpg)
 
 ## About the code
