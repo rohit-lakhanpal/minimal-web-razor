@@ -1,0 +1,59 @@
+﻿@page "/{*catchall}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Catch-All page";    
+}
+
+<div class="text-center">
+    <h1 class="display-4">Catch-All Page</h1>
+    <p>
+        Request for <code>@HttpContext.Request.Host@HttpContext.Request.Path</code> recieved at <small>@(DateTime.Now.ToString("R"))</small>.
+    </p>
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="catchAllSearchLabel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>   
+    </span>
+    <input type="text" class="form-control" id="catchAllSearchFilter" placeholder="Start typing to filter ..." aria-label="Search" aria-describedby="catchAllSearchLabel">
+</div>
+
+<table id="catchAllOutputTable" class="table table-striped table-sm table-hover">
+    <caption>
+        Http Request for <code>@HttpContext.Request.Host</code>
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col">Name</th>                                
+            <th scope="col">Value</th>
+            <th scope="col">Type</th>
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var header in HttpContext.Request.Headers.OrderBy(h => h.Key).ToList())
+        {
+            <tr>
+                <td scope="row"><small>@header.Key</small></td>
+                <td class="text-left"><small>@header.Value</small></td>
+                <td><span class="text-primary">Request Header</span></td>
+            </tr>
+        }
+
+        @if (HttpContext.Request.QueryString.HasValue)
+        {
+            var parts = System.Web.HttpUtility.ParseQueryString(HttpContext.Request.QueryString.Value);
+
+            foreach (string key in parts)
+            {
+                <tr>
+                    <td scope="row"><small>@key</small></td>
+                    <td class="text-left"><small>@parts[key]</small></td>
+                    <td><span class="text-info">Query String</span></td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

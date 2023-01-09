@@ -1,0 +1,14 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "About";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This is a Minimal ASP.NET <code>(@ViewContext.GetType().Assembly.GetName().Version)</code> Web Application that:</p>
+
+<ul>
+    <li>Exposes health checks via the /healthz (via Microsoft.Extensions.Diagnostics.HealthChecks)</li>
+    <li>Redirects all other requests to a catch-all Razor Page that outputs the http connection, header and query properties.</li>
+</ul>
+

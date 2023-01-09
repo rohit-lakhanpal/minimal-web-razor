@@ -1,0 +1,65 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - minimal-web-razor-demo-wapp
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: minimal-web-razor-demo-wapp    # set this to your application's name
+  AZURE_WEBAPP_PROJECT_PATH: './src/Minimal.Web.Razor' # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '7.x'           # set this to the dot net version to use
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release 
+        working-directory: ${{env.AZURE_WEBAPP_PROJECT_PATH}}
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o myapp
+        working-directory: ${{env.AZURE_WEBAPP_PROJECT_PATH}}       
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: ${{env.AZURE_WEBAPP_PROJECT_PATH}}/myapp
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'minimal-web-razor-demo-wapp'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: '.'
