@@ -13,10 +13,10 @@ You can use this application when testing different hosting configurations.
 
 ### Demo
 Try the following urls:
-- https://minimal-web-razor-demo-wapp.azurewebsites.net
-- https://minimal-web-razor-demo-wapp.azurewebsites.net/healthz
-- https://minimal-web-razor-demo-wapp.azurewebsites.net/path/to/non/existant/folder/handled/by/catch-all
-- https://minimal-web-razor-demo-wapp.azurewebsites.net/test-query-string?key1=value1&key2=value2
+- https://minimal-web-razor.azurewebsites.net
+- https://minimal-web-razor.azurewebsites.net/healthz
+- https://minimal-web-razor.azurewebsites.net/path/to/non/existant/folder/handled/by/catch-all
+- https://minimal-web-razor.azurewebsites.net/test-query-string?key1=value1&key2=value2
 
 ## How to run this sample
 ### Clone the repo
