@@ -9,6 +9,11 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AZURE_WEBAPP_NAME: minimal-web-razor  # set this to your application's name
+  AZURE_WEBAPP_PROJECT_PATH: './src/Minimal.Web.Razor' # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '7.x' # set this to the dot net version to use    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,20 +24,22 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.x'
+          dotnet-version: '8.x'
           include-prerelease: true
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        working-directory: ${{env.AZURE_WEBAPP_PROJECT_PATH}}
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o myapp
+        working-directory: ${{env.AZURE_WEBAPP_PROJECT_PATH}}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.AZURE_WEBAPP_PROJECT_PATH}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,7 +67,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'minimal-web-razor'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           package: .
           

@@ -9,7 +9,7 @@ This is a Minimal ASP.NET (7.0.0.0) Web Application that:
 
 You can use this application when testing different hosting configurations.
 
-[![Build and deploy ASP.Net Core app to Azure Web App - minimal-web-razor-demo-wapp](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/main_minimal-web-razor-demo-wapp.yml/badge.svg)](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/main_minimal-web-razor-demo-wapp.yml)
+[![Build and deploy ASP.Net Core app to Azure Web App - minimal-web-razor](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/build-and-deploy-main.yml/badge.svg)](https://github.com/rohit-lakhanpal/minimal-web-razor/actions/workflows/build-and-deploy-main.yml)
 
 ### Demo
 Try the following urls:
